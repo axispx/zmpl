@@ -627,7 +627,7 @@ pub const Object = struct {
     }
 
     pub fn put(self: *Object, key: []const u8, value: *Value) !void {
-        const key_dupe = try self.allocator.dupe(u8, key);
+        const key_dupe: []const u8 = try self.allocator.dupe(u8, key);
         switch (value.*) {
             .object, .array => try self.hashmap.put(key_dupe, value),
             inline else => {
